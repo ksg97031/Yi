@@ -95,16 +95,18 @@ func Run() {
 	limit := make(chan bool, Option.Thread)
 	var wg sync.WaitGroup
 
+	var count = 0
 	for project := range projects {
 		if project.DBPath == "" {
 			continue
 		}
+		count += 1
 		wg.Add(1)
 		limit <- true
 		go WgExec(project, &wg, limit)
+		wg.Wait()
 	}
 
-	wg.Wait()
 	close(limit)
 
 	// After all running, you will start trying the wrong projects

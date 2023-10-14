@@ -44,6 +44,8 @@ var static embed.FS
 var templates embed.FS
 
 func Init() {
+	logging.Logger.Infoln("Web Starting ... ")
+
 	gin.SetMode("release")
 	router := gin.Default()
 

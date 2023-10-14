@@ -2,6 +2,7 @@ package main
 
 import (
 	"Yi/pkg/runner"
+	"Yi/pkg/web"
 )
 
 /**
@@ -16,6 +17,6 @@ func main() {
 	runner.Run()
 
 	if runner.Option.Target == "" && runner.Option.Targets == "" {
-		go runner.Init()
+		web.Init()
 	}
 }

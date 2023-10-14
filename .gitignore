@@ -16,3 +16,4 @@ cmd/config.yaml
 cmd/__debug*
 cmd/db
 cmd/github
+dbupdate.sh
