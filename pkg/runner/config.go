@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
@@ -60,8 +61,20 @@ func Init() {
 	} else {
 		logging.Logger.Infoln("Load profile ", configFile)
 	}
-	ReadYamlConfig(configFile)
 
+	today := time.Now().Format("2006-01-02") + "/"
+	DirNames = DirName{
+		ZipDir:    Pwd + "/db/zip/" + today,
+		ResDir:    Pwd + "/db/results/" + today,
+		DbDir:     Pwd + "/db/database/" + today,
+		GithubDir: Pwd + "/github/" + today,
+	}
+	os.MkdirAll(DirNames.ZipDir, 0755)
+	os.MkdirAll(DirNames.ResDir, 0755)
+	os.MkdirAll(DirNames.DbDir, 0755)
+	os.MkdirAll(DirNames.GithubDir, 0755)
+
+	ReadYamlConfig(configFile)
 }
 
 func ReadYamlConfig(configFile string) {

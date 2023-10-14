@@ -27,15 +27,10 @@ func Run() {
 	go func() {
 		if Option.Target != "" {
 			Option.Target = strings.TrimRight(Option.Target, "/")
-			exist, project := db.Exist(Option.Target)
-			if exist {
-				projects <- project
-				return
-			}
 			name := utils.GetName(Option.Target)
 			err, dbPath, res := GetRepos(Option.Target)
 
-			project = db.Project{
+			project := db.Project{
 				Project:       name,
 				Url:           Option.Target,
 				Language:      res.Language,
@@ -67,15 +62,10 @@ func Run() {
 						<-limit
 					}()
 
-					exist, project := db.Exist(target)
-					if exist {
-						projects <- project
-						return
-					}
 					name := utils.GetName(target)
 					err, dbPath, res := GetRepos(target)
 
-					project = db.Project{
+					project := db.Project{
 						Project:  name,
 						Url:      target,
 						Language: res.Language,

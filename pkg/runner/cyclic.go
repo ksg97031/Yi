@@ -3,7 +3,6 @@ package runner
 import (
 	"Yi/pkg/db"
 	"fmt"
-	"os"
 	"sync"
 	"time"
 
@@ -32,17 +31,6 @@ func Cyclic() {
 		UpdateRule()
 
 		count := 0
-		today := time.Now().Format("2006-01-02") + "/"
-		DirNames = DirName{
-			ZipDir:    Pwd + "/db/zip/" + today,
-			ResDir:    Pwd + "/db/results/" + today,
-			DbDir:     Pwd + "/db/database/" + today,
-			GithubDir: Pwd + "/github/" + today,
-		}
-		os.MkdirAll(DirNames.ZipDir, 0755)
-		os.MkdirAll(DirNames.ResDir, 0755)
-		os.MkdirAll(DirNames.DbDir, 0755)
-		os.MkdirAll(DirNames.GithubDir, 0755)
 
 		var projects []db.Project
 		globalDBTmp := db.GlobalDB.Model(&db.Project{})

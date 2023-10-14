@@ -2,7 +2,6 @@ package main
 
 import (
 	"Yi/pkg/runner"
-	"Yi/pkg/web"
 )
 
 /**
@@ -13,9 +12,10 @@ import (
 
 func main() {
 	runner.ParseArguments()
-	go runner.Cyclic()
-	go runner.Run()
-	go runner.Retry()
+	runner.Init()
+	runner.Run()
 
-	web.Init()
+	if runner.Option.Target == "" && runner.Option.Targets == "" {
+		go runner.Init()
+	}
 }

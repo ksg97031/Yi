@@ -42,6 +42,8 @@ var RetryProject = make(map[string]ProError)
 
 // GetRepos from github Download and build a good database
 func GetRepos(url_tmp string) (error, string, GithubRes) {
+	logging.Logger.Infoln("Get Repos: ", url_tmp)
+
 	// https://github.com/prometheus/prometheus  -> https://api.github.com/repos/prometheus/prometheus
 	guri := strings.ReplaceAll(url_tmp, "github.com", "api.github.com/repos")
 
@@ -106,6 +108,8 @@ func GetTimeBran(guri, url_tmp string) GithubRes {
 
 // GetLanguage Obtain the code language of the project  https://api.github.com/repos/prometheus/prometheus/languages
 func GetLanguage(guri, url_tmp string) (string, bool) {
+	logging.Logger.Infoln("Get Language: ", url_tmp)
+
 	req, _ := http.NewRequest("GET", guri+"/languages", nil)
 	req.Header.Set("Accept", "application/vnd.github.v3.text-match+json")
 	if Option.Token != "" {
@@ -169,6 +173,8 @@ func GetLanguage(guri, url_tmp string) (string, bool) {
 2: No corresponding database is generated on github
 */
 func GetDb(guri, url, languages string) (error, string, int) {
+	logging.Logger.Infoln("Get DB: ", url)
+
 	req, _ := http.NewRequest("GET", guri, nil)
 	req.Header.Set("Accept", "application/zip")
 	req.Header.Set("Accept-Encoding", "identity")
