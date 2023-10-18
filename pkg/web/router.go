@@ -58,9 +58,7 @@ func Init() {
 	router.SetHTMLTemplate(template.Must(template.New("").ParseFS(templates, "templates/*")))
 
 	// basic Authentication
-	authorized := router.Group("/", gin.BasicAuth(gin.Accounts{
-		runner.Option.UserName: runner.Option.Pwd,
-	}))
+	authorized := router.Group("/")
 
 	authorized.GET("/", func(c *gin.Context) {
 		c.Redirect(302, "/index")
