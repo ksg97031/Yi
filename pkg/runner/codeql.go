@@ -73,6 +73,10 @@ func Analyze(database string, name string, language string, qls []string) map[st
 		Title:   name,
 		Msg:     fmt.Sprintf("%s end of analysis", name),
 	}
+
+	// Delete old database
+	exec.Command("rm", "-rf", database).Run()
+
 	ProgressBar[name] = 100
 	db.AddRecord(record)
 	return res

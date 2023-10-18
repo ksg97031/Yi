@@ -2,4 +2,5 @@ logs/*
 images/*
 data/*
 cmd/config.yaml
+CodeQLVul.db
 Dockerfile
